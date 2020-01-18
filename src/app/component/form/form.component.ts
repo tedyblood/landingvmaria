@@ -19,12 +19,15 @@ export class FormComponent implements OnInit {
   send(form: NgForm) {
     // console.log("Control: ", form.value);
     var formulario: any = document.getElementById("formulario");
+    var respuesta = document.getElementById("respuesta");
+    respuesta.classList.remove("displayOff");
+
     formulario.addEventListener("submit", e => {
       e.preventDefault();
       var datos: any = new FormData(formulario);
-      console.log(datos.get("name"));
-      console.log(datos.get("email"));
-      console.log(datos.get("tel"));
+      // console.log(datos.get("name"));
+      // console.log(datos.get("email"));
+      // console.log(datos.get("tel"));
 
       fetch("./assets/php/sendmail.php", {
         method: "POST",
@@ -34,11 +37,11 @@ export class FormComponent implements OnInit {
         .then(data => {
           console.log(data);
           if (data === "error") {
-            // respuesta.innerHTML = `<p class='error'>Algo salió mal. Inténtalo de nuevo o llámenos al 6249-5080</p>`;
-            console.log("Mensaje de Error JS");
+            respuesta.innerHTML = `<p class='error'>Algo salió mal. Inténtalo de nuevo o llámenos al 6251-0186</p>`;
+            //console.log("Mensaje de Error JS");
           } else {
-            // respuesta.innerHTML = `<p class='success'>Gracias por contactarnos. Nos pondremos en contacto con usted lo antes posible!</p>`;
-            console.log("Mensaje de Exito JS");
+            respuesta.innerHTML = `<p class='success'>Gracias por contactarnos. Nos pondremos en contacto con usted lo antes posible!</p>`;
+            //console.log("Mensaje de Exito JS");
           }
         });
     });
